@@ -1,0 +1,15 @@
+{
+    "tables": [
+        {
+            "TABLE": "<table path>",
+            "SEPARATOR": "<table separator>",
+            "HAS_HEADER": true,
+            "experiments": [
+                {
+                    "ISNULLEQNULL": true,
+                    "MAXLHS": 5
+                }
+            ]
+        }
+    ]
+}
