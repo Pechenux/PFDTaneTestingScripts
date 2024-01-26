@@ -1,5 +1,6 @@
 import numpy as np
 import json
+from executeTane import execTane
 
 from measure_time import measure_time
 from measure_memory import measure_memory
@@ -7,18 +8,18 @@ from executePFDTane import execPFDTane
 from run_tests import run_tests
 from format_for_graph import format_for_graph
 
-error_values = np.arange(0, 1, 0.025)
-# error_values = np.arange(0, 1, 0.3) # debug
+# error_values = np.arange(0, 1, 0.025)
+error_values = np.arange(0, 1, 0.3) # debug
 TEST_COUNT = 50
 CONFIDENCE = 0.95
 
-# experiments 2a and 2b
+# experiments 1, 3a and 3b
 
-def run_experiment_1():
+def run_experiment_2():
     output_time = ""
-    # output_memory = ""
+    output_memory = ""
 
-    with open('experiments_1.json') as fp:
+    with open('experiments_2.json') as fp:
         experiments = json.load(fp)
 
         for table in experiments["tables"]:
@@ -30,7 +31,7 @@ def run_experiment_1():
                     print('Evaluating:', error_measure)
 
                     output_time += f"{table['TABLE']} experiment {i + 1} {error_measure}\n"
-                    # output_memory += f"{table['TABLE']} experiment {i + 1} {error_measure}\n"
+                    output_memory += f"{table['TABLE']} experiment {i + 1} {error_measure}\n"
 
                     for erroe_value in error_values:
                         print('Error:', erroe_value)
@@ -38,24 +39,26 @@ def run_experiment_1():
                             "TABLE": table['TABLE'],
                             "SEPARATOR": table['SEPARATOR'],
                             "HAS_HEADER": table['HAS_HEADER'],
-                            "ISNULLEQNULL": experiments_list[i]["ISNULLEQNULL"],
+                            "ISNULLEQNULL": True,
                             "ERROR": erroe_value,
                             "ERROR_MEASURE": error_measure,
-                            "MAXLHS": experiments_list[i]["MAXLHS"]
+                            "MAXLHS": 5
                         }
-                        test_time_output = run_tests(measure_time, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
-                        # test_memory_output = run_tests(measure_memory, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
-                        print('  Time:', test_time_output)
-                        # print('  Memory:', test_memory_output)
-                        output_time += format_for_graph(erroe_value, test_time_output)
+                        pfdtane_time_output = run_tests(measure_time, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
+                        pfdtane_memory_output = run_tests(measure_memory, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
+                        tane_time_output = run_tests(measure_time, execTane, parameters, TEST_COUNT, CONFIDENCE)
+                        tane_memory_output = run_tests(measure_memory, execTane, parameters, TEST_COUNT, CONFIDENCE)
+                        print('  Time:', 'pfdtane', pfdtane_time_output, 'tane', tane_time_output)
+                        print('  Memory:', 'pfdtane', pfdtane_memory_output, 'tane', tane_memory_output)
+                        # output_time += format_for_graph(erroe_value, test_time_output)
                         # output_memory += format_for_graph(erroe_value, test_memory_output)
                     
                     output_time += '\n'
-                    # output_memory += '\n'
+                    output_memory += '\n'
     
-    with open('experiments_1_time.out', 'w') as fp:
-        fp.write(output_time)
+    # with open('experiments_2_time.out', 'w') as fp:
+    #     fp.write(output_time)
     
-    # with open('experiments_1_memory.out', 'w') as fp:
+    # with open('experiments_2_memory.out', 'w') as fp:
     #     fp.write(output_memory)
     
