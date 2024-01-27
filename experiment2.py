@@ -22,6 +22,7 @@ def run_experiment_2():
     with open('experiments_2.json') as fp:
         experiments = json.load(fp)
 
+        # time
         for table in experiments["tables"]:
             print('Running:', table['TABLE'])
             experiments_list = table['experiments']
@@ -30,8 +31,7 @@ def run_experiment_2():
                 for error_measure in ['per_value', 'per_tuple']:
                     print('Evaluating:', error_measure)
 
-                    output_time += f"{table['TABLE']} experiment {i + 1} {error_measure}\n"
-                    output_memory += f"{table['TABLE']} experiment {i + 1} {error_measure}\n"
+                    output_time += f"% {table['TABLE']} experiment {i + 1} {error_measure}\n"
 
                     for erroe_value in error_values:
                         print('Error:', erroe_value)
@@ -45,20 +45,44 @@ def run_experiment_2():
                             "MAXLHS": 5
                         }
                         pfdtane_time_output = run_tests(measure_time, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
-                        pfdtane_memory_output = run_tests(measure_memory, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
                         tane_time_output = run_tests(measure_time, execTane, parameters, TEST_COUNT, CONFIDENCE)
-                        tane_memory_output = run_tests(measure_memory, execTane, parameters, TEST_COUNT, CONFIDENCE)
                         print('  Time:', 'pfdtane', pfdtane_time_output, 'tane', tane_time_output)
-                        print('  Memory:', 'pfdtane', pfdtane_memory_output, 'tane', tane_memory_output)
                         # output_time += format_for_graph(erroe_value, test_time_output)
-                        # output_memory += format_for_graph(erroe_value, test_memory_output)
                     
                     output_time += '\n'
+    
+        with open('experiments_2_time.out', 'w') as fp:
+            fp.write(output_time)
+        
+        # memory
+        for table in experiments["tables"]:
+            print('Running:', table['TABLE'])
+            experiments_list = table['experiments']
+            for i in range(len(experiments_list)):
+                print('Experiment with parameters:', experiments_list[i])
+                for error_measure in ['per_value', 'per_tuple']:
+                    print('Evaluating:', error_measure)
+
+                    output_memory += f"% {table['TABLE']} experiment {i + 1} {error_measure}\n"
+
+                    for erroe_value in error_values:
+                        print('Error:', erroe_value)
+                        parameters = {
+                            "TABLE": table['TABLE'],
+                            "SEPARATOR": table['SEPARATOR'],
+                            "HAS_HEADER": table['HAS_HEADER'],
+                            "ISNULLEQNULL": True,
+                            "ERROR": erroe_value,
+                            "ERROR_MEASURE": error_measure,
+                            "MAXLHS": 5
+                        }
+                        pfdtane_memory_output = run_tests(measure_memory, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
+                        tane_memory_output = run_tests(measure_memory, execTane, parameters, TEST_COUNT, CONFIDENCE)
+                        print('  Memory:', 'pfdtane', pfdtane_memory_output, 'tane', tane_memory_output)
+                        # output_memory += format_for_graph(erroe_value, test_memory_output)
+                    
                     output_memory += '\n'
-    
-    # with open('experiments_2_time.out', 'w') as fp:
-    #     fp.write(output_time)
-    
-    # with open('experiments_2_memory.out', 'w') as fp:
-    #     fp.write(output_memory)
+        
+        with open('experiments_2_memory.out', 'w') as fp:
+            fp.write(output_memory)
     
