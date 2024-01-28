@@ -18,7 +18,7 @@ error_values = np.delete(error_values, [0]) # remove value 0\
 TEST_COUNT = 50
 CONFIDENCE = 0.95
 
-# experiments 1, 3a and 3b
+# experiments 3a and 3b
 def run_experiment_2():
     output_time = ""
     output_memory = ""
