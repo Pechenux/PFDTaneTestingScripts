@@ -29,7 +29,7 @@ def run_experiment_3():
             table_latex.set_cols_align(["c"] * 3)
 
             output_time += f"% {error_measure}\n"
-            rows = [['Datasets', 'per_value', 'per_tuple']]
+            rows = [['Datasets', 'PFDTane', 'Tane']]
 
             for table in experiments["tables"]:
                 print('Running:', table['TABLE'])
@@ -69,7 +69,7 @@ def run_experiment_3():
             table_latex.set_cols_align(["c"] * 3)
 
             output_memory += f"% {error_measure}\n"
-            rows = [['Datasets', 'per_value', 'per_tuple']]
+            rows = [['Datasets', 'PFDTane', 'Tane']]
 
             for table in experiments["tables"]:
                 print('Running:', table['TABLE'])
@@ -95,7 +95,7 @@ def run_experiment_3():
                 rows.append(row)
             
             table_latex.add_rows(rows)
-            output_time += latextable.draw_latex(table_latex, caption=f"Memory {error_measure}".replace('_', '\\_'), label=f"table:timemory_me_{error_measure}", position='ht')
+            output_time += latextable.draw_latex(table_latex, caption=f"Memory {error_measure}".replace('_', '\\_'), label=f"table:memory_{error_measure}", position='ht')
             output_time += '\n'
         
         with open('out/experiments_3_memory.out', 'w') as fp:
