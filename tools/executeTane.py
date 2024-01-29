@@ -6,6 +6,6 @@ def execTane(parameters):
 
     algo.load_data(parameters["TABLE"], parameters["SEPARATOR"], parameters["HAS_HEADER"])
 
-    algo.execute(is_null_equal_null=parameters["ISNULLEQNULL"], error=parameters["ERROR"], error_measure=parameters["ERROR_MEASURE"], max_lhs=parameters["MAXLHS"])
+    algo.execute(error=parameters["ERROR"], error_measure=parameters["ERROR_MEASURE"])
 
     return algo.get_fds()

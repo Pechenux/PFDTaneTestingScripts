@@ -35,17 +35,13 @@ def run_experiment_3():
                 print('Running:', table['TABLE'])
 
                 row = [os.path.basename(table['TABLE'])]
-
-                print('Experiment with parameters:', table['ISNULLEQNULL'], table['MAXLHS'])
                 
                 parameters = {
                     "TABLE": table['TABLE'],
                     "SEPARATOR": table['SEPARATOR'],
                     "HAS_HEADER": table['HAS_HEADER'],
-                    "ISNULLEQNULL": table['ISNULLEQNULL'],
                     "ERROR": 0,
                     "ERROR_MEASURE": error_measure,
-                    "MAXLHS": table['MAXLHS']
                 }
                 pfdtane_time_output = run_tests(measure_time, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
                 tane_time_output = run_tests(measure_time, execTane, parameters, TEST_COUNT, CONFIDENCE)
@@ -75,17 +71,13 @@ def run_experiment_3():
                 print('Running:', table['TABLE'])
 
                 row = [os.path.basename(table['TABLE'])]
-
-                print('Experiment with parameters:', table['ISNULLEQNULL'], table['MAXLHS'])
                 
                 parameters = {
                     "TABLE": table['TABLE'],
                     "SEPARATOR": table['SEPARATOR'],
                     "HAS_HEADER": table['HAS_HEADER'],
-                    "ISNULLEQNULL": table['ISNULLEQNULL'],
                     "ERROR": 0,
                     "ERROR_MEASURE": error_measure,
-                    "MAXLHS": table['MAXLHS']
                 }
                 pfdtane_memory_output = run_tests(measure_memory, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
                 tane_memory_output = run_tests(measure_memory, execTane, parameters, TEST_COUNT, CONFIDENCE)

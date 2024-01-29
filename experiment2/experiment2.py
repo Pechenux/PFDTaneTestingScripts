@@ -11,8 +11,8 @@ from tools.executePFDTane import execPFDTane
 from tools.executeTane import execTane
 from tools.run_tests import run_tests
 
-# error_values = np.arange(0, 1, 0.025)
-error_values = np.arange(0, 1, 0.3) # debug
+error_values = np.arange(0, 1, 0.025)
+# error_values = np.arange(0, 1, 0.3) # debug
 error_values = np.round(error_values, 3) # round
 error_values = np.delete(error_values, [0]) # remove value 0\
 TEST_COUNT = 50
@@ -41,18 +41,15 @@ def run_experiment_2():
 
                 row = [os.path.basename(table['TABLE'])]
 
-                print('Experiment with parameters:', table['ISNULLEQNULL'], table['MAXLHS'])
-
                 for erroe_value in error_values:
                     print('Error:', erroe_value)
+
                     parameters = {
                         "TABLE": table['TABLE'],
                         "SEPARATOR": table['SEPARATOR'],
                         "HAS_HEADER": table['HAS_HEADER'],
-                        "ISNULLEQNULL": table['ISNULLEQNULL'],
                         "ERROR": erroe_value,
                         "ERROR_MEASURE": error_measure,
-                        "MAXLHS": table['MAXLHS']
                     }
                     pfdtane_time_output = run_tests(measure_time, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
                     tane_time_output = run_tests(measure_time, execTane, parameters, TEST_COUNT, CONFIDENCE)
@@ -85,18 +82,14 @@ def run_experiment_2():
 
                 row = [os.path.basename(table['TABLE'])]
 
-                print('Experiment with parameters:', table['ISNULLEQNULL'], table['MAXLHS'])
-
                 for erroe_value in error_values:
                     print('Error:', erroe_value)
                     parameters = {
                         "TABLE": table['TABLE'],
                         "SEPARATOR": table['SEPARATOR'],
                         "HAS_HEADER": table['HAS_HEADER'],
-                        "ISNULLEQNULL": table['ISNULLEQNULL'],
                         "ERROR": erroe_value,
                         "ERROR_MEASURE": error_measure,
-                        "MAXLHS": table['MAXLHS']
                     }
                     pfdtane_memory_output = run_tests(measure_memory, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
                     tane_memory_output = run_tests(measure_memory, execTane, parameters, TEST_COUNT, CONFIDENCE)
