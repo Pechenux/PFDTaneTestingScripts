@@ -7,8 +7,8 @@ import pandas as pd
 def num_pairs(n):
     return (n-1)*n/2 
 
-def g1(lhs, rhs, filename, SEP):
-    df = pd.read_csv(filename, sep=SEP, header=None)
+def g1(lhs, rhs, df):
+    
     data = df.groupby(lhs).groups
 
     S = 0
@@ -20,6 +20,6 @@ def g1(lhs, rhs, filename, SEP):
         S += num_pairs(len(rows))
         for c in y_counts:
             S -= num_pairs(c)
-    S =  S/num_pairs(len(df))
+    S = S/num_pairs(len(df))
     return S
     # print("error e(", lhs, "->", rhs, ") =", S)

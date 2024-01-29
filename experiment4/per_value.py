@@ -4,16 +4,23 @@
 
 import pandas as pd
 
-def per_value(lhs, rhs, filename, SEP):
-    df = pd.read_csv(filename, sep=SEP, header=None)
+def per_value(lhs, rhs, df):
+    
     data = df.groupby(lhs).groups
 
     S = 0
     for a in data:
+        if len(data[a]) == 1: 
+            S+=1
+            continue
         rows = data[a].to_list()
         y_values = df.loc[rows].groupby([rhs]).groups
         y_counts = set(map(lambda k: len(y_values[k]), y_values))
-        S += max(y_counts)/len(rows)
+        try:
+            S += max(y_counts)/len(rows)
+        except:
+            print("problem with nulls")
+            quit()
 
     S = 1 - S/len(data)
     return S
