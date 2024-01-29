@@ -6,6 +6,6 @@ import os
 if not os.path.exists('./out'):
     os.makedirs('./out')
 
-# run_experiment_1()
+run_experiment_1()
 # run_experiment_2()
-run_experiment_3()
+# run_experiment_3()

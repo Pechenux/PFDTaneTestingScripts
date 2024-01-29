@@ -11,6 +11,7 @@ error_values = np.arange(0, 1, 0.025)
 # error_values = np.arange(0, 1, 0.3) # debug
 error_values = np.round(error_values, 3) # round
 TEST_COUNT = 50
+# TEST_COUNT = 5 # debug
 CONFIDENCE = 0.95
 
 # experiments 2a and 2b

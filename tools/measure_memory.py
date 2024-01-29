@@ -1,4 +1,16 @@
-from memory_profiler import memory_usage
+from multiprocessing import Process
+import psutil
+import time
 
 def measure_memory(exec_function, parameters):
-    return memory_usage((exec_function, (parameters, )), max_usage=True)
+    p = Process(target=exec_function, args=(parameters, ))
+    p.start()
+    ps = psutil.Process(p.pid)
+    max_usage = 0
+    while (p.is_alive()):
+        curr_usage = ps.memory_info().rss
+        if (curr_usage > max_usage):
+            max_usage = curr_usage
+        time.sleep(0.001)
+    
+    return max_usage
