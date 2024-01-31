@@ -18,6 +18,9 @@ def add_line(error, values, h, marker, color, label):
 
 def add_csv(csv_path, color, label, marker=' '):
     data = pd.read_csv(csv_path, sep=' ')
+    row_with_zero = data['error'] == 0
+    data = data[~row_with_zero]
+    
     add_line(data["error"].to_numpy(), data["value"].to_numpy(), data["h"].to_numpy(), marker, color, label)
 
 

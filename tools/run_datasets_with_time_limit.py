@@ -28,40 +28,41 @@ def run_datasets(folder_path):
     datasets = []
 
     for filename in os.listdir(folder_path):
-        has_header = True
-        delimiter = ','
-        with open(f"{folder_path}/{filename}", 'r') as csvfile:
-            sniffer = csv.Sniffer()
-            has_header = sniffer.has_header(csvfile.read(10000))
-        with open(f"{folder_path}/{filename}", 'r') as csvfile:
-            sniffer = csv.Sniffer()
-            delimiter = sniffer.sniff(csvfile.read(10000)).delimiter
+        if filename.endswith('.csv'):
+            has_header = True
+            delimiter = ','
+            with open(f"{folder_path}/{filename}", 'r') as csvfile:
+                sniffer = csv.Sniffer()
+                has_header = sniffer.has_header(csvfile.read(10000))
+            with open(f"{folder_path}/{filename}", 'r') as csvfile:
+                sniffer = csv.Sniffer()
+                delimiter = sniffer.sniff(csvfile.read(10000)).delimiter
 
-        print(f"{folder_path}/{filename}", delimiter, has_header)
-        
-        parameters = {
-            "TABLE": f"{folder_path}/{filename}",
-            "SEPARATOR": delimiter,
-            "HAS_HEADER": has_header,
-            "ERROR": 0,
-            "ERROR_MEASURE": 'per_tuple',
-        }
+            print(f"{folder_path}/{filename}", delimiter, has_header)
+            
+            parameters = {
+                "TABLE": f"{folder_path}/{filename}",
+                "SEPARATOR": delimiter,
+                "HAS_HEADER": has_header,
+                "ERROR": 0,
+                "ERROR_MEASURE": 'per_tuple',
+            }
 
-        run_time = 0
-        q = Queue()
-        p = Process(target=run_dataset, args=(parameters, q))
-        p.start()
-        p.join(HIGH_TIME)
-        if p.is_alive():
-            p.terminate()
-            print(f"{folder_path}/{filename} took more than {HIGH_TIME} second(s) to run")
-        else:
-            run_time = q.get()
-
-            if (run_time >= LOW_TIME):
-                datasets.append(Table(f"{folder_path}/{filename}", delimiter, has_header, run_time))
+            run_time = 0
+            q = Queue()
+            p = Process(target=run_dataset, args=(parameters, q))
+            p.start()
+            p.join(HIGH_TIME)
+            if p.is_alive():
+                p.terminate()
+                print(f"{folder_path}/{filename} took more than {HIGH_TIME} second(s) to run")
             else:
-                print(f"{folder_path}/{filename} took less than {LOW_TIME} second(s) to run ({run_time})")
+                run_time = q.get()
+
+                if (run_time >= LOW_TIME):
+                    datasets.append(Table(f"{folder_path}/{filename}", delimiter, has_header, run_time))
+                else:
+                    print(f"{folder_path}/{filename} took less than {LOW_TIME} second(s) to run ({run_time})")
     
     datasets.sort(key=lambda table: table.run_time)
     datasets = list(map(lambda table: {

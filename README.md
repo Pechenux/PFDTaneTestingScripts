@@ -30,7 +30,7 @@ Change directory to Desbordante
 
 Create folder good_datasets
 
-Add datasets to this folder
+Add datasets to this folder. All datasets should be in csv format
 
 Run `python3 generate_config.py`
 
