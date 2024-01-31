@@ -15,7 +15,7 @@ error_values = np.arange(0, 1, 0.025)
 # error_values = np.arange(0, 1, 0.3) # debug
 error_values = np.round(error_values, 3) # round
 error_values = np.delete(error_values, [0]) # remove value 0\
-TEST_COUNT = 50
+TEST_COUNT = 20
 CONFIDENCE = 0.95
 
 # experiments 3a and 3b

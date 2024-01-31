@@ -32,10 +32,10 @@ def run_datasets(folder_path):
         delimiter = ','
         with open(f"{folder_path}/{filename}", 'r') as csvfile:
             sniffer = csv.Sniffer()
-            has_header = sniffer.has_header(csvfile.read(2048))
+            has_header = sniffer.has_header(csvfile.read(10000))
         with open(f"{folder_path}/{filename}", 'r') as csvfile:
             sniffer = csv.Sniffer()
-            delimiter = sniffer.sniff(csvfile.read(2048)).delimiter
+            delimiter = sniffer.sniff(csvfile.read(10000)).delimiter
 
         print(f"{folder_path}/{filename}", delimiter, has_header)
         

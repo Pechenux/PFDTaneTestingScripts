@@ -11,7 +11,7 @@ from tools.executePFDTane import execPFDTane
 from tools.executeTane import execTane
 from tools.run_tests import run_tests
 
-TEST_COUNT = 50
+TEST_COUNT = 20
 CONFIDENCE = 0.95
 
 # experiments 1
