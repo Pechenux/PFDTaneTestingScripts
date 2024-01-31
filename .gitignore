@@ -6,6 +6,8 @@ myeasylog.log
 
 good_datasets
 
+parameters.json
+
 experiments_1.json
 experiments_2.json
 experiments_3.json
@@ -16,3 +18,5 @@ experiments_2_time.out
 experiments_2_memory.out
 experiments_3_time.out
 experiments_3_memory.out
+
+*.csv
