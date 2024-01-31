@@ -12,11 +12,4 @@ experiments_1.json
 experiments_2.json
 experiments_3.json
 
-experiments_1_time.out
-experiments_1_memory.out
-experiments_2_time.out
-experiments_2_memory.out
-experiments_3_time.out
-experiments_3_memory.out
-
-*.csv
+/out/*

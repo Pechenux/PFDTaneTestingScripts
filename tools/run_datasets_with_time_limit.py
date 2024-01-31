@@ -1,11 +1,10 @@
 import os
 import json
 import csv
-import signal
+import time
+
 from dataclasses import dataclass
-
-from contextlib import contextmanager
-
+from multiprocessing import Process, Queue
 
 from tools.measure_time import measure_time
 from tools.executePFDTane import execPFDTane
@@ -17,19 +16,13 @@ class Table:
     HAS_HEADER: str
     run_time: float
 
+def run_dataset(parameters, ret):
+    start_time = time.time()
+    execPFDTane(parameters)
+    ret.put(time.time() - start_time)
 
-class TimeoutException(Exception): pass
-
-@contextmanager
-def time_limit(seconds):
-    def signal_handler(signum, frame):
-        raise TimeoutException("Timed out!")
-    signal.signal(signal.SIGALRM, signal_handler)
-    signal.alarm(seconds)
-    try:
-        yield
-    finally:
-        signal.alarm(0)
+LOW_TIME = 1
+HIGH_TIME = 20
 
 def run_datasets(folder_path):
     datasets = []
@@ -54,16 +47,21 @@ def run_datasets(folder_path):
             "ERROR_MEASURE": 'per_tuple',
         }
 
-        try:
-            run_time = 0
-            with time_limit(20):
-                run_time = measure_time(execPFDTane, parameters)
-            if (run_time >= 2):
+        run_time = 0
+        q = Queue()
+        p = Process(target=run_dataset, args=(parameters, q))
+        p.start()
+        p.join(HIGH_TIME)
+        if p.is_alive():
+            p.terminate()
+            print(f"{folder_path}/{filename} took more than {HIGH_TIME} second(s) to run")
+        else:
+            run_time = q.get()
+
+            if (run_time >= LOW_TIME):
                 datasets.append(Table(f"{folder_path}/{filename}", delimiter, has_header, run_time))
             else:
-                print(f"{folder_path}/{filename} took less than 2 seconds to run")
-        except TimeoutException as e:
-            print(f"{folder_path}/{filename} took more than 20 seconds to run")
+                print(f"{folder_path}/{filename} took less than {LOW_TIME} second(s) to run ({run_time})")
     
     datasets.sort(key=lambda table: table.run_time)
     datasets = list(map(lambda table: {
