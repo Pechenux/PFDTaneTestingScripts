@@ -32,10 +32,8 @@ Create folder good_datasets
 
 Add datasets to this folder. All datasets should be in csv format
 
+Remove out folder, if present
+
 Run `python3 generate_config.py`
-
-Create file ./generation/parameters.json
-
-Copy contents of ./out/datasets_times.json to ./generation/parameters.json
 
 Run `python3 main.py`

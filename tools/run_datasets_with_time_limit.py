@@ -21,8 +21,8 @@ def run_dataset(parameters, ret):
     execfullPFDTane(parameters)
     ret.put(time.time() - start_time)
 
-LOW_TIME = 1
-HIGH_TIME = 20
+LOW_TIME = 2
+HIGH_TIME = 35
 
 def run_datasets(folder_path):
     datasets = []
@@ -72,7 +72,7 @@ def run_datasets(folder_path):
         "run_time": table.run_time
     }, datasets))
 
-    with open("out/datasets_times.json", "w") as outfile: 
+    with open("generation/parameters.json", "w") as outfile: 
         json.dump({"tables": datasets}, outfile, indent = 4)
     
     
