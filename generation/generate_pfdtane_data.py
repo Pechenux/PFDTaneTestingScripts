@@ -4,7 +4,7 @@ import numpy as np
 
 from tools.measure_time import measure_time
 from tools.measure_memory import measure_memory
-from tools.executePFDTane import execPFDTane
+from tools.executePFDTane import execPFDTane, loadPFDTane, execfullPFDTane
 from generation.generate_common_data import generate_common_data
 
 
@@ -21,8 +21,8 @@ def generate_pfdtane_data():
     with open('generation/parameters.json') as fp:
         experiments = json.load(fp)
 
-    generate_common_data('pfdtane_time_1', experiments, ERROR_VALUES_1, measure_time, execPFDTane)
-    # generate_common_data('pfdtane_memory_1', experiments, ERROR_VALUES_1, measure_memory, execPFDTane)
+    generate_common_data('pfdtane_time_1', experiments, ERROR_VALUES_1, measure_time, execPFDTane, loadPFDTane)
+    generate_common_data('pfdtane_memory_1', experiments, ERROR_VALUES_1, measure_memory, execfullPFDTane)
 
-    generate_common_data('pfdtane_time_2', experiments, ERROR_VALUES_2, measure_time, execPFDTane)
-    # generate_common_data('pfdtane_memory_2', experiments, ERROR_VALUES_2, measure_memory, execPFDTane)
+    generate_common_data('pfdtane_time_2', experiments, ERROR_VALUES_2, measure_time, execPFDTane, loadPFDTane)
+    # generate_common_data('pfdtane_memory_2', experiments, ERROR_VALUES_2, measure_memory, execfullPFDTane)

@@ -2,7 +2,7 @@ from multiprocessing import Process
 import psutil
 import time
 
-def measure_memory(exec_function, parameters):
+def measure_memory(exec_function, _, parameters):  # second parameter is unused, memory measure should always use full exec function
     p = Process(target=exec_function, args=(parameters, ))
     p.start()
     ps = psutil.Process(p.pid)
@@ -13,4 +13,4 @@ def measure_memory(exec_function, parameters):
             max_usage = curr_usage
         time.sleep(0.001)
     
-    return max_usage
+    return max_usage, 0  # second value is always zero for compatibility with time measure function

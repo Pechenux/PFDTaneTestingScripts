@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from multiprocessing import Process, Queue
 
 from tools.measure_time import measure_time
-from tools.executePFDTane import execPFDTane
+from tools.executePFDTane import execfullPFDTane
 
 @dataclass
 class Table:
@@ -18,7 +18,7 @@ class Table:
 
 def run_dataset(parameters, ret):
     start_time = time.time()
-    execPFDTane(parameters)
+    execfullPFDTane(parameters)
     ret.put(time.time() - start_time)
 
 LOW_TIME = 1

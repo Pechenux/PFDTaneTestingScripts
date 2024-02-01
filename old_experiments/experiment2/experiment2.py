@@ -7,8 +7,8 @@ import latextable
 
 from tools.measure_time import measure_time
 from tools.measure_memory import measure_memory
-from tools.executePFDTane import execPFDTane
-from tools.executeTane import execTane
+from tools.executePFDTane import execfullPFDTane
+from tools.executeTane import execfullTane
 from tools.run_tests import run_tests
 
 error_values = np.arange(0, 1, 0.025)
@@ -51,8 +51,8 @@ def run_experiment_2():
                         "ERROR": erroe_value,
                         "ERROR_MEASURE": error_measure,
                     }
-                    pfdtane_time_output = run_tests(measure_time, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
-                    tane_time_output = run_tests(measure_time, execTane, parameters, TEST_COUNT, CONFIDENCE)
+                    pfdtane_time_output = run_tests(measure_time, execfullPFDTane, parameters, TEST_COUNT, CONFIDENCE)
+                    tane_time_output = run_tests(measure_time, execfullTane, parameters, TEST_COUNT, CONFIDENCE)
                     print('  Time:', 'pfdtane', pfdtane_time_output, 'tane', tane_time_output, 'relation', pfdtane_time_output[0] / tane_time_output[0])
                     row.append(pfdtane_time_output[0] / tane_time_output[0])
                 
@@ -91,8 +91,8 @@ def run_experiment_2():
                         "ERROR": erroe_value,
                         "ERROR_MEASURE": error_measure,
                     }
-                    pfdtane_memory_output = run_tests(measure_memory, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
-                    tane_memory_output = run_tests(measure_memory, execTane, parameters, TEST_COUNT, CONFIDENCE)
+                    pfdtane_memory_output = run_tests(measure_memory, execfullPFDTane, parameters, TEST_COUNT, CONFIDENCE)
+                    tane_memory_output = run_tests(measure_memory, execfullTane, parameters, TEST_COUNT, CONFIDENCE)
                     print('  Memory:', 'pfdtane', pfdtane_memory_output, 'tane', tane_memory_output, 'relation', pfdtane_memory_output[0] / tane_memory_output[0])
                     row.append(pfdtane_memory_output[0] / tane_memory_output[0])
                 

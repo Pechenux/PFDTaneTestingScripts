@@ -7,8 +7,8 @@ import latextable
 
 from tools.measure_time import measure_time
 from tools.measure_memory import measure_memory
-from tools.executePFDTane import execPFDTane
-from tools.executeTane import execTane
+from tools.executePFDTane import execfullPFDTane
+from tools.executeTane import execfullTane
 from tools.run_tests import run_tests
 
 TEST_COUNT = 20
@@ -43,8 +43,8 @@ def run_experiment_3():
                     "ERROR": 0,
                     "ERROR_MEASURE": error_measure,
                 }
-                pfdtane_time_output = run_tests(measure_time, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
-                tane_time_output = run_tests(measure_time, execTane, parameters, TEST_COUNT, CONFIDENCE)
+                pfdtane_time_output = run_tests(measure_time, execfullPFDTane, parameters, TEST_COUNT, CONFIDENCE)
+                tane_time_output = run_tests(measure_time, execfullTane, parameters, TEST_COUNT, CONFIDENCE)
                 print('  Time:', 'pfdtane', pfdtane_time_output, 'tane', tane_time_output)
                 row += [f"{pfdtane_time_output[0]} +- {pfdtane_time_output[1]}", f"{tane_time_output[0]} +- {tane_time_output[1]}"]
                 
@@ -79,8 +79,8 @@ def run_experiment_3():
                     "ERROR": 0,
                     "ERROR_MEASURE": error_measure,
                 }
-                pfdtane_memory_output = run_tests(measure_memory, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
-                tane_memory_output = run_tests(measure_memory, execTane, parameters, TEST_COUNT, CONFIDENCE)
+                pfdtane_memory_output = run_tests(measure_memory, execfullPFDTane, parameters, TEST_COUNT, CONFIDENCE)
+                tane_memory_output = run_tests(measure_memory, execfullTane, parameters, TEST_COUNT, CONFIDENCE)
                 print('  Memory:', 'pfdtane', pfdtane_memory_output, 'tane', tane_memory_output, 'relation', pfdtane_memory_output[0] / tane_memory_output[0])
                 row += [f"{pfdtane_memory_output[0]} +- {pfdtane_memory_output[1]}", f"{tane_memory_output[0]} +- {tane_memory_output[1]}"]
                 

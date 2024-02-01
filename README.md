@@ -24,7 +24,7 @@ Install requirements:
 
 Change directory to Desbordante
 
-`Run python3 -m pip install .`
+Run `python3 -m pip install .`
 
 # How to generate mesuares
 

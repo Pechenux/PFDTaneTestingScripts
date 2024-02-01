@@ -3,7 +3,7 @@ import json
 
 from tools.measure_time import measure_time
 from tools.measure_memory import measure_memory
-from tools.executePFDTane import execPFDTane
+from tools.executePFDTane import execfullPFDTane
 from tools.run_tests import run_tests
 from tools.format_for_graph import format_for_graph
 
@@ -41,7 +41,7 @@ def run_experiment_1():
                             "ERROR": erroe_value,
                             "ERROR_MEASURE": error_measure,
                         }
-                        test_time_output = run_tests(measure_time, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
+                        test_time_output = run_tests(measure_time, execfullPFDTane, parameters, TEST_COUNT, CONFIDENCE)
                         print('  Time:', test_time_output)
                         output_time += format_for_graph(erroe_value, test_time_output)
                     
@@ -68,7 +68,7 @@ def run_experiment_1():
                             "ERROR": erroe_value,
                             "ERROR_MEASURE": error_measure,
                         }
-                        test_memory_output = run_tests(measure_memory, execPFDTane, parameters, TEST_COUNT, CONFIDENCE)
+                        test_memory_output = run_tests(measure_memory, execfullPFDTane, parameters, TEST_COUNT, CONFIDENCE)
                         print('  Memory:', test_memory_output)
                         output_memory += format_for_graph(erroe_value, test_memory_output)
                     
