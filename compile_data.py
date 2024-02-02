@@ -68,6 +68,8 @@ for filename in os.listdir('out'):
 
 report = ""
 
+# TODO: parse with one runned test
+# FIXME: check for empty csv
 for dataset_test in to_process:
     if (dataset_test.only_error_measure == None):
         dataframes_1 = get_all_data(dataset_test.filename, dataset_test.algo, dataset_test.perf, dataset_test.measure, 1, dataset_test.run_count)

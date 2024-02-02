@@ -18,15 +18,15 @@ def add_line(error, values, h, marker, color, label):
 
 def add_csv(csv_path, color, label, marker=' '):
     data = pd.read_csv(csv_path, sep=' ')
-    row_with_zero = data['error'] == 0
-    data = data[~row_with_zero]
+    # row_with_zero = data['error'] == 0
+    # data = data[~row_with_zero]
     
     add_line(data["error"].to_numpy(), data["value"].to_numpy(), data["h"].to_numpy(), marker, color, label)
 
 
 plt.rcParams['figure.figsize'] = [4, 5]
 
-datasets = ['LegacyPayors', 'EpicVitals']
+datasets = ['BKB_WaterQualityData_2020084', 'EpicVitals', 'jena_climate_2009_2016', 'measures_v2', 'nuclear_explosions', 'parking_citations', 'SEA', 'games']
 
 perfomanse_measures = {
     'time': 'Time (s)',
@@ -35,9 +35,10 @@ perfomanse_measures = {
 
 for perfomanse_measure in perfomanse_measures.keys():
     for dataset in datasets:
-        plt.title(f"{dataset}.csv")
+        # plt.title(f"{dataset}.csv")
         plt.xlabel("Error")
         plt.ylabel(perfomanse_measures[perfomanse_measure])
+        plt.xlim([0, 1])
         add_csv(f'out/pfdtane_{perfomanse_measure}_per_value_{dataset}.csv', '#FF0000', 'Per Value')
         add_csv(f'out/pfdtane_{perfomanse_measure}_per_tuple_{dataset}.csv', '#0000FF', 'Per Tuple')
         plt.legend()
