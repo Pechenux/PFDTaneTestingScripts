@@ -7,7 +7,7 @@ from pathlib import Path
 from tools.run_tests import run_tests
 
 
-def generate_common_data(test_run, prefix, experiments, error_values, measure_function, exec_function, load_function=None):
+def generate_common_pfdtane_data(test_run, prefix, experiments, error_values, measure_function, exec_function, load_function=None):
     print('Run number', test_run)
     for table in experiments["tables"]:
         print('Running:', table['TABLE'])

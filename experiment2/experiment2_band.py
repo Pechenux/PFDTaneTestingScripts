@@ -30,8 +30,10 @@ datasets = ['BKB_WaterQualityData_2020084', 'EpicVitals', 'jena_climate_2009_201
 
 perfomanse_measures = {
     'time': 'Time (s)',
-    # 'memory': 'Memory (kb)'
+    'memory': 'Memory (bytes)'
 }
+
+# experiment 2a 2b band plot
 
 for perfomanse_measure in perfomanse_measures.keys():
     for dataset in datasets:

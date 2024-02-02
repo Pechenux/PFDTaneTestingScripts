@@ -6,7 +6,7 @@ def execfullTane(parameters):
 
     algo.load_data(parameters["TABLE"], parameters["SEPARATOR"], parameters["HAS_HEADER"])
 
-    algo.execute(error=parameters["ERROR"], error_measure=parameters["ERROR_MEASURE"])
+    algo.execute(error=parameters["ERROR"])
 
     return algo.get_fds()
 
@@ -18,6 +18,6 @@ def loadTane(parameters):
     return algo
 
 def execTane(algo, parameters):
-    algo.execute(error=parameters["ERROR"], error_measure=parameters["ERROR_MEASURE"])
+    algo.execute(error=parameters["ERROR"])
 
     return algo.get_fds()

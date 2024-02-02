@@ -4,14 +4,14 @@ import pandas as pd
 
 colors = [
     "#000000", # black
-    "#0000FF", # blue
-    "#00B7EB", # cyan
-    "#008000", # green
-    "#9ACD32", # Yellow-green
-    "#DA9100", # Harvest Gold
-    "#CC5500", # burned orange
     "#FF0000", # red
-    "#2C1608", # brown
+    "#0000FF", # blue
+    "#DA9100", # Harvest Gold
+    "#00B7EB", # cyan
+    "#CC5500", # burned orange
+    "#008000", # green
+    "#E952DE", # purple
+    "#9ACD32", # Yellow-green
 ]
 
 def color_variant(hex_color, brightness_offset=1):
@@ -43,7 +43,7 @@ groups = [['BKB_WaterQualityData_2020084', 'games', 'nuclear_explosions', 'SEA']
 
 perfomanse_measures = {
     'time': 'Time (s)',
-    # 'memory': 'Memory (kb)'
+    'memory': 'Memory (bytes)'
 }
 
 error_measures = {
@@ -53,19 +53,36 @@ error_measures = {
 
 counter = 0
 
+# experiment 2a 2b bars plot
+
+# for perfomanse_measure in perfomanse_measures.keys():
+#     for error_measure in ['per_value', 'per_tuple']:
+#         for group_number in range(len(groups)):
+#             # plt.title(f"Full comparison")
+#             plt.xlabel("Error")
+#             plt.ylabel(perfomanse_measures[perfomanse_measure])
+#             plt.xlim([0, 1])
+
+#             for dataset in groups[group_number]:
+#                 add_csv(f'out/pfdtane_{perfomanse_measure}_{error_measure}_{dataset}.csv', colors[counter], f'{dataset}')
+#                 counter += 1
+
+#             plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.10), fancybox=True, shadow=True, ncol=1)
+#             plt.savefig(f"out/{perfomanse_measure}_{error_measure}_{group_number}.pdf", format="pdf", bbox_inches="tight")
+#             plt.cla()
+#         counter = 0
+#     counter = 0
+
 for perfomanse_measure in perfomanse_measures.keys():
-    for error_measure in ['per_value', 'per_tuple']:
-        for group_number in range(len(groups)):
-            # plt.title(f"Full comparison")
-            plt.xlabel("Error")
-            plt.ylabel(perfomanse_measures[perfomanse_measure])
-            plt.xlim([0, 1])
+    for group_number in range(len(groups)):
+        plt.xlabel("Error")
+        plt.ylabel(perfomanse_measures[perfomanse_measure])
 
-            for dataset in groups[group_number]:
-                add_csv(f'out/pfdtane_{perfomanse_measure}_{error_measure}_{dataset}.csv', colors[counter], f'{dataset}')
-                counter += 1
+        for dataset in groups[group_number]:
+            add_dataset(dataset, perfomanse_measure, colors[counter])
+            counter += 1
 
-            plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.10), fancybox=True, shadow=True, ncol=1)
-            plt.savefig(f"out/{perfomanse_measure}_{error_measure}_{group_number}.pdf", format="pdf", bbox_inches="tight")
-            plt.cla()
-        counter = 0
+        plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.10), fancybox=True, shadow=True, ncol=1)
+        plt.savefig(f"out/{perfomanse_measure}_{group_number}.pdf", format="pdf", bbox_inches="tight")
+        plt.cla()
+    counter = 0
