@@ -17,15 +17,9 @@ def get_dataframe(csv_path):
     return data[~row_with_zero][['error', 'value']]
 
 def get_relation_between_dataframes(dataset, dataframe_pfdtane, dataframe_tane):
-    dataframe_pfdtane.drop(columns=['h'])
-    dataframe_tane.drop(columns=['h'])
-
-    dataframe_pfdtane.rename(columns={"value": "pfdvalue"})
-    dataframe_tane.rename(columns={"value": "tanevalue"})
-
     pfdtane_values_by_tane = dataframe_pfdtane[dataframe_pfdtane['error'].isin(dataframe_tane['error'].tolist())]
-    merged_dataframe = pd.merge(pfdtane_values_by_tane, dataframe_tane, on=['error'])
-    merged_dataframe["relation"] = merged_dataframe["pfdvalue"] / merged_dataframe["tanevalue"]
+    merged_dataframe = pd.merge(left=pfdtane_values_by_tane, right=dataframe_tane, on=['error'])
+    merged_dataframe[f'{dataset}'] = merged_dataframe["value_x"] / merged_dataframe["value_y"]
 
     return merged_dataframe[['error', f'{dataset}']]
 
@@ -36,11 +30,6 @@ def merge_dataframes(dataframes):
 # experiment 3a 3b table
 for perfomanse_measure in perfomanse_measures.keys():
     for error_measure in ['per_value', 'per_tuple']:
-        # rows = [['Datasets',
-        #          f'PFDTane {perfomanse_measures[perfomanse_measure]}',
-        #          f'Tane {perfomanse_measures[perfomanse_measure]}']
-        #         ]
-
         relation_dataframes = []
 
         for dataset in datasets:
@@ -49,7 +38,8 @@ for perfomanse_measure in perfomanse_measures.keys():
             relation_dataframes.append(get_relation_between_dataframes(dataset, dataframe_pfdtane, dataframe_tane))
         
         merged_dataframes = merge_dataframes(relation_dataframes)
-        error_values = merged_dataframes.iloc[[0]].to_numpy()
+        merged_dataframes = merged_dataframes.transpose()
+        error_values = merged_dataframes.iloc[[0]].to_numpy().flatten()
         relations = merged_dataframes.iloc[1:, :]
 
         table_latex = Texttable()
