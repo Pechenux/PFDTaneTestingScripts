@@ -45,14 +45,14 @@ for perfomanse_measure in perfomanse_measures.keys():
         table_latex = Texttable()
         table_latex.set_cols_align(["c"] * (1 + len(error_values)))
 
-        rows = [['Datasets', *error_values]]
+        rows = [['', *error_values]]
 
         for i, row in relations.iterrows():
             rows.append([str(i).replace('_', '\\_'), *row])
         
         table_latex.add_rows(rows)
 
-        multicolumn_header = [("", 1), ("error threshold", len(error_values))]
+        multicolumn_header = [("Datasets", 1), ("error threshold", len(error_values))]
         latex_output = latextable.draw_latex(table_latex, caption=f"{perfomanse_measures[perfomanse_measure]} {error_measure}".replace('_', '\\_'), label=f"table:{perfomanse_measure}_{error_measure}", position='ht', multicolumn_header=multicolumn_header)
 
         with open(f'out/experiments_3_{perfomanse_measure}_{error_measure}.out', 'w') as fp:
