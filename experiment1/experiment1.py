@@ -2,12 +2,13 @@
 from texttable import Texttable
 import latextable
 import pandas as pd
+import numpy as np
 
 datasets = ['BKB_WaterQualityData_2020084', 'EpicVitals', 'jena_climate_2009_2016', 'measures_v2', 'nuclear_explosions', 'parking_citations', 'SEA', 'games']
 
 perfomanse_measures = {
     'time': 'Time (s)',
-    'memory': 'Memory (bytes)'
+    'memory': 'Memory (bytes)' # convert to mb
 }
 
 def parse_csv(csv_path):
@@ -16,6 +17,7 @@ def parse_csv(csv_path):
 
 # experiment 1 table
 for perfomanse_measure in perfomanse_measures.keys():
+    # combine into one table
     for error_measure in ['per_value', 'per_tuple']:
         table_latex = Texttable()
         table_latex.set_cols_align(['c'] * 3)
@@ -27,7 +29,7 @@ for perfomanse_measure in perfomanse_measures.keys():
         for dataset in datasets:
             value_pfdtane = parse_csv(f'out/pfdtane_{perfomanse_measure}_{error_measure}_{dataset}.csv')
             value_tane = parse_csv(f'out/tane_{perfomanse_measure}_{dataset}.csv')
-            rows.append([dataset, f"{value_pfdtane[0]} +- {value_pfdtane[1]}", f"{value_tane[0]} +- {value_tane[1]}"])
+            rows.append([dataset.replace('_', '\\_'), f"{np.round(value_pfdtane[0], 3)} +- {np.round(value_pfdtane[1], 3)}", f"{np.round(value_tane[0], 3)} +- {np.round(value_tane[1], 3)}"])
         
         table_latex.add_rows(rows)
         latex_output = latextable.draw_latex(table_latex, caption=f"{error_measure}".replace('_', '\\_'), label=f"table:{perfomanse_measure}_{error_measure}", position='ht')
