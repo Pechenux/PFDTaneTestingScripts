@@ -1,6 +1,15 @@
 # Importing libraries 
 import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.ticker as tkr
+
+def sizeof_fmt(x, pos):
+    if x<0:
+        return ""
+    for x_unit in ['bytes', 'kB', 'MB', 'GB', 'TB']:
+        if x < 1024.0:
+            return "%3.1f %s" % (x, x_unit)
+        x /= 1024.0
 
 def color_variant(hex_color, brightness_offset=1):
     """ takes a color like #87c95f and produces a lighter or darker variant """
@@ -30,7 +39,7 @@ datasets = ['BKB_WaterQualityData_2020084', 'EpicVitals', 'jena_climate_2009_201
 
 perfomanse_measures = {
     'time': 'Time (s)',
-    'memory': 'Memory (bytes)'
+    'memory': 'Memory'
 }
 
 # experiment 2a 2b band plot
@@ -41,6 +50,12 @@ for perfomanse_measure in perfomanse_measures.keys():
         plt.xlabel("Error")
         plt.ylabel(perfomanse_measures[perfomanse_measure])
         plt.xlim([0, 1])
+
+        if (perfomanse_measure == 'memory'):
+            ax = plt.subplots()[1]
+            ax.yaxis.set_label_text(label=perfomanse_measures[perfomanse_measure])
+            ax.yaxis.set_major_formatter(tkr.FuncFormatter(sizeof_fmt))
+
         add_csv(f'out/pfdtane_{perfomanse_measure}_per_value_{dataset}.csv', '#FF0000', 'Per Value')
         add_csv(f'out/pfdtane_{perfomanse_measure}_per_tuple_{dataset}.csv', '#0000FF', 'Per Tuple')
         plt.legend()

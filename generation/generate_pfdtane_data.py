@@ -27,5 +27,5 @@ def generate_pfdtane_data():
         generate_common_pfdtane_data(test_run, 'pfdtane_time_1', experiments, ERROR_VALUES_1, measure_time, execPFDTane, loadPFDTane)
         # generate_common_data(test_run, 'pfdtane_memory_1', experiments, ERROR_VALUES_1, measure_memory, execfullPFDTane)
 
-        # generate_common_data(test_run, 'pfdtane_time_2', experiments, ERROR_VALUES_2, measure_time, execPFDTane, loadPFDTane)
-        # generate_common_data(test_run, 'pfdtane_memory_2', experiments, ERROR_VALUES_2, measure_memory, execfullPFDTane)
+        generate_common_pfdtane_data(test_run, 'pfdtane_time_2', experiments, ERROR_VALUES_2, measure_time, execPFDTane, loadPFDTane)
+        # generate_common_pfdtane_data(test_run, 'pfdtane_memory_2', experiments, ERROR_VALUES_2, measure_memory, execfullPFDTane)

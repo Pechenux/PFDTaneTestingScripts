@@ -1,6 +1,7 @@
 # Importing libraries 
 import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.ticker as tkr
 
 colors = [
     "#000000", # black
@@ -13,6 +14,14 @@ colors = [
     "#E952DE", # purple
     "#9ACD32", # Yellow-green
 ]
+
+def sizeof_fmt(x, pos):
+    if x<0:
+        return ""
+    for x_unit in ['bytes', 'kB', 'MB', 'GB', 'TB']:
+        if x < 1024.0:
+            return "%3.1f %s" % (x, x_unit)
+        x /= 1024.0
 
 def color_variant(hex_color, brightness_offset=1):
     """ takes a color like #87c95f and produces a lighter or darker variant """
@@ -43,7 +52,7 @@ groups = [['BKB_WaterQualityData_2020084', 'games', 'nuclear_explosions', 'SEA']
 
 perfomanse_measures = {
     'time': 'Time (s)',
-    'memory': 'Memory (bytes)'
+    'memory': 'Memory'  # remove 1e8 from top (make in megabytes)
 }
 
 error_measures = {
@@ -77,6 +86,11 @@ for perfomanse_measure in perfomanse_measures.keys():
     for group_number in range(len(groups)):
         plt.xlabel("Error")
         plt.ylabel(perfomanse_measures[perfomanse_measure])
+        
+        if (perfomanse_measure == 'memory'):
+            ax = plt.subplots()[1]
+            ax.yaxis.set_label_text(label=perfomanse_measures[perfomanse_measure])
+            ax.yaxis.set_major_formatter(tkr.FuncFormatter(sizeof_fmt))
 
         for dataset in groups[group_number]:
             add_dataset(dataset, perfomanse_measure, colors[counter])
