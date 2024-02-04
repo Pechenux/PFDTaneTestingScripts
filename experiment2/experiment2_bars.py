@@ -7,11 +7,12 @@ colors = [
     "#000000", # black
     "#FF0000", # red
     "#0000FF", # blue
-    "#DA9100", # Harvest Gold
+    "#422400", # brown
     "#00B7EB", # cyan
     "#CC5500", # burned orange
     "#008000", # green
     "#E952DE", # purple
+    "#DA9100", # Harvest Gold
     "#9ACD32", # Yellow-green
 ]
 
@@ -33,7 +34,7 @@ def color_variant(hex_color, brightness_offset=1):
     return "#" + "".join([hex(i)[2:] for i in new_rgb_int])
 
 def add_line(error, values, h, marker, color, label):
-    plt.errorbar(error, values, yerr=h, color=color, label=label, linewidth=0.1, marker=marker, markersize=3, capsize=2)
+    plt.errorbar(error, values, yerr=h, color=color, label=label, linewidth=0.1, marker=marker, markersize=2, capsize=2)
     # plt.plot(error, values, color=color, label=label, linewidth=0.1, marker=marker)
 
 def add_csv(csv_path, color, label, marker=' '):
@@ -43,7 +44,7 @@ def add_csv(csv_path, color, label, marker=' '):
 def add_dataset(filename, perfomanse_measure, color):
     add_csv(f'out/pfdtane_{perfomanse_measure}_per_value_{filename}.csv', color, f'{filename} Per Value', marker='.')
     # add_csv(f'out/pfdtane_{perfomanse_measure}_per_tuple_{filename}.csv', color, f'{filename} Per Tuple', marker='^')
-    add_csv(f'out/pfdtane_{perfomanse_measure}_per_tuple_{filename}.csv', color_variant(color, 100), f'{filename} Per Tuple', marker='^')
+    add_csv(f'out/pfdtane_{perfomanse_measure}_per_tuple_{filename}.csv', color_variant(color, 75), f'{filename} Per Tuple', marker='.')
 
 
 plt.rcParams['figure.figsize'] = [4, 8] # [4, 5]
