@@ -32,14 +32,14 @@ for perfomanse_measure in perfomanse_measures.keys():
         value_tane = parse_csv(f'out/tane_{perfomanse_measure}_{dataset}.csv')
         conversion_ratio = 1 if perfomanse_measure == 'time' else BYTES_IN_MEGABYTE
         rows.append([dataset.replace('_', '\\_'),
-                     f"{np.round(value_pfdtane_per_value[0] / conversion_ratio, 3)} \\pm {np.round(value_pfdtane_per_value[1] / conversion_ratio, 3)}",
-                     f"{np.round(value_pfdtane_per_tuple[0] / conversion_ratio, 3)} \\pm {np.round(value_pfdtane_per_tuple[1] / conversion_ratio, 3)}",
-                     f"{np.round(value_tane[0] / conversion_ratio, 3)} \\pm {np.round(value_tane[1] / conversion_ratio, 3)}"])
+                     f"{np.round(value_pfdtane_per_value[0] / conversion_ratio, 3):.3f} $\\pm$ {np.round(value_pfdtane_per_value[1] / conversion_ratio, 3):.3f}",
+                     f"{np.round(value_pfdtane_per_tuple[0] / conversion_ratio, 3):.3f} $\\pm$ {np.round(value_pfdtane_per_tuple[1] / conversion_ratio, 3):.3f}",
+                     f"{np.round(value_tane[0] / conversion_ratio, 3):.3f} $\\pm$ {np.round(value_tane[1] / conversion_ratio, 3):.3f}"])
     
     table_latex.add_rows(rows)
     multicolumn_header = [("Datasets", 1), (perfomanse_measures[perfomanse_measure], 3)]
     latex_output = latextable.draw_latex(table_latex, caption=f"{perfomanse_measures[perfomanse_measure]}".replace('_', '\\_'), label=f"table:{perfomanse_measure}", position='ht', multicolumn_header=multicolumn_header)
 
-    with open(f'out/experiments_1_{perfomanse_measure}.out', 'w') as fp:
+    with open(f'out/paper/exp1/experiments_1_{perfomanse_measure}.out', 'w') as fp:
         fp.write(latex_output)
 

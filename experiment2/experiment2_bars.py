@@ -42,8 +42,8 @@ def add_csv(csv_path, color, label, marker=' '):
 
 def add_dataset(filename, perfomanse_measure, color):
     add_csv(f'out/pfdtane_{perfomanse_measure}_per_value_{filename}.csv', color, f'{filename} Per Value', marker='.')
-    add_csv(f'out/pfdtane_{perfomanse_measure}_per_tuple_{filename}.csv', color, f'{filename} Per Tuple', marker='^')
-    # add_csv(f'out/pfdtane_{perfomanse_measure}_per_tuple_{filename}.csv', color_variant(color, 100), f'{filename} Per Tuple', marker='^')
+    # add_csv(f'out/pfdtane_{perfomanse_measure}_per_tuple_{filename}.csv', color, f'{filename} Per Tuple', marker='^')
+    add_csv(f'out/pfdtane_{perfomanse_measure}_per_tuple_{filename}.csv', color_variant(color, 100), f'{filename} Per Tuple', marker='^')
 
 
 plt.rcParams['figure.figsize'] = [4, 8] # [4, 5]
@@ -97,6 +97,6 @@ for perfomanse_measure in perfomanse_measures.keys():
             counter += 1
 
         plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.10), fancybox=True, shadow=True, ncol=1)
-        plt.savefig(f"out/{perfomanse_measure}_{group_number}.pdf", format="pdf", bbox_inches="tight")
+        plt.savefig(f"out/paper/exp2/bar/{perfomanse_measure}_{group_number}.pdf", format="pdf", bbox_inches="tight")
         plt.cla()
     counter = 0

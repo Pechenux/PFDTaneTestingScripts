@@ -64,6 +64,8 @@ to_process: list[DatasetTest] = []
 
 for dataset in os.listdir('out'):
     if os.path.isdir(f"out/{dataset}"):
+        if dataset == 'paper':
+            continue
         max_test_runs_count = len(os.listdir(f"out/{dataset}"))
         for algo in ['pfdtane', 'tane']:
             for perf in ['time', 'memory']:
@@ -108,3 +110,17 @@ for dataset_test in to_process:
 
 with open('out/report.txt', 'w') as report_file:
     report_file.write(report)
+
+import os
+if not os.path.exists('./out/paper'):
+    os.makedirs('./out/paper')
+if not os.path.exists('./out/paper/exp1'):
+    os.makedirs('./out/paper/exp1')
+if not os.path.exists('./out/paper/exp2'):
+    os.makedirs('./out/paper/exp2')
+if not os.path.exists('./out/paper/exp2/band'):
+    os.makedirs('./out/paper/exp2/band')
+if not os.path.exists('./out/paper/exp2/bar'):
+    os.makedirs('./out/paper/exp2/bar')
+if not os.path.exists('./out/paper/exp3'):
+    os.makedirs('./out/paper/exp3')

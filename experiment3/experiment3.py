@@ -48,14 +48,14 @@ for perfomanse_measure in perfomanse_measures.keys():
         rows = [['\\diagbox{Dataset}{Error threshold}', *error_values]]
 
         for i, row in relations.iterrows():
-            rows.append([str(i).replace('_', '\\_'), *row])
+            rows.append([str(i).replace('_', '\\_'), *list(map(lambda number: format(number, ".3f"), row))])
         
         table_latex.add_rows(rows)
 
         # multicolumn_header = [("Datasets", 1), ("error threshold", len(error_values))]
         latex_output = latextable.draw_latex(table_latex, caption=f"{perfomanse_measures[perfomanse_measure]} {error_measure}".replace('_', '\\_'), label=f"table:{perfomanse_measure}_{error_measure}", position='ht')  # , multicolumn_header=multicolumn_header)
 
-        with open(f'out/experiments_3_{perfomanse_measure}_{error_measure}.out', 'w') as fp:
+        with open(f'out/paper/exp3/experiments_3_{perfomanse_measure}_{error_measure}.out', 'w') as fp:
             fp.write(latex_output)
         
 
