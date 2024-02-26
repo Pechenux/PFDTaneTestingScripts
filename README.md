@@ -2,15 +2,10 @@
 
 # How to install project
 
-Clone https://github.com/iliya-b/Desbordante
+Clone retest branch of this project
 
-Change directory to Desbordante
+copy .SO file from folder Desbordante/build/target/  to the root of this project  PFDTaneTestingScripts
 
-Switch to "pfdtane-nongeneralized" branch
-
-Build Desbordante (skip creating python venv in instructions)
-
-Go back to the root of this project
 
 Create venv:
 
@@ -22,9 +17,7 @@ Install requirements:
 
 `pip install -r requirements.txt`
 
-Change directory to Desbordante
 
-Run `python3 -m pip install .`
 
 # How to generate mesuares
 
