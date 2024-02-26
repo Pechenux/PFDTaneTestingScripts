@@ -4,6 +4,9 @@
 
 Clone retest branch of this project
 
+
+(if Desbordante not installed: follow instructions from "Build instrucitons" section from https://github.com/iliya-b/Desbordante/tree/pfdtane-nongeneralized, and clone this repo)
+
 copy .SO file from folder Desbordante/build/target/  to the root of this project  PFDTaneTestingScripts
 
 
