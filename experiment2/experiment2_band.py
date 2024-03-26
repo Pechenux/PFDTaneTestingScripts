@@ -60,4 +60,5 @@ for perfomanse_measure in perfomanse_measures.keys():
         add_csv(f'out/pfdtane_{perfomanse_measure}_per_tuple_{dataset}.csv', '#0000FF', 'Per Tuple')
         plt.legend()
         plt.savefig(f"out/paper/exp2/band/{perfomanse_measure}_{dataset}.pdf", format="pdf", bbox_inches="tight")
+        plt.savefig(f"out/paper/exp2/band/{perfomanse_measure}_{dataset}.eps", format="eps", bbox_inches="tight")
         plt.cla()

@@ -99,5 +99,6 @@ for perfomanse_measure in perfomanse_measures.keys():
 
         plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.10), fancybox=True, shadow=True, ncol=1)
         plt.savefig(f"out/paper/exp2/bar/{perfomanse_measure}_{group_number}.pdf", format="pdf", bbox_inches="tight")
+        plt.savefig(f"out/paper/exp2/bar/{perfomanse_measure}_{group_number}.eps", format="eps", bbox_inches="tight")
         plt.cla()
     counter = 0
