@@ -1,0 +1,3 @@
+there is some cases for 
+1) test_diff.py with cps1.csv
+2) test_noise.py  with neighbors10k.csv
