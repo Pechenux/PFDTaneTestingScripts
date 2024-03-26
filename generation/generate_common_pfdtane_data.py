@@ -31,7 +31,7 @@ def generate_common_pfdtane_data(test_run, prefix, experiments, error_values, me
                         }
                         testout = measure_function(exec_function, load_function, parameters)
                         outcsv.writerow([erroe_value, testout[0], testout[1]])
-            except:
-                print(f"Report {filename} did not complete, deleting incomplete data")
+            except Exception as e:
+                print(f"Report {filename} did not complete, deleting incomplete data. Error {e}")
                 os.remove(filename)
                 sys.exit()

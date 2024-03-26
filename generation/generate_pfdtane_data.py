@@ -23,8 +23,10 @@ def generate_pfdtane_data():
     experiments = None
     with open('generation/parameters.json') as fp:
         experiments = json.load(fp)
+    
+    start_count = int(input("Enter last run number, if last run was interupted, or next to the last, if last ran completely. (zero is default): ").strip() or 0)
 
-    for test_run in range(TEST_COUNT_2):
+    for test_run in range(start_count, TEST_COUNT_2):
         # generate_common_pfdtane_data(test_run, 'pfdtane_time_1', experiments, ERROR_VALUES_1, measure_time, execPFDTane, loadPFDTane)
         # generate_common_data(test_run, 'pfdtane_memory_1', experiments, ERROR_VALUES_1, measure_memory, execfullPFDTane)
 
